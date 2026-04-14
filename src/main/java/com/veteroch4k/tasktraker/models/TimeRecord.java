@@ -6,15 +6,15 @@ import lombok.Data;
 @Data
 public class TimeRecord {
 
-  private int id;
+  private Long id;
 
   private int employeeId;
 
   private int taskId;
 
-  private LocalDateTime startTime;
+  private LocalDateTime startDate;
 
-  private LocalDateTime endTime;
+  private LocalDateTime endDate;
 
   private String description;
 
