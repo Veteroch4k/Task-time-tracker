@@ -1,4 +1,4 @@
-package com.veteroch4k.tasktraker.models.DTO;
+package com.veteroch4k.tasktracker.models.DTO;
 
 public record TaskDTO(
      String name,

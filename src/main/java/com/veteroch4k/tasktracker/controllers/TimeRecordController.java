@@ -1,9 +1,7 @@
-package com.veteroch4k.tasktraker.controllers;
+package com.veteroch4k.tasktracker.controllers;
 
-import com.veteroch4k.tasktraker.models.DTO.TimeRecordDTO;
-import com.veteroch4k.tasktraker.models.TimeRecord;
+import com.veteroch4k.tasktracker.models.DTO.TimeRecordDTO;
 import java.time.LocalDateTime;
-import org.apache.coyote.Response;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +23,7 @@ public class TimeRecordController {
     return ResponseEntity.ok().build();
   }
 
-  @GetMapping("/{emp_id}/")
+  @GetMapping("/{emp_id}")
   public ResponseEntity<Void> getEmployeeTimeRecords(@PathVariable Long emp_id,
       @RequestParam @DateTimeFormat(iso = ISO.DATE_TIME)LocalDateTime startDate,
       @RequestParam @DateTimeFormat(iso = ISO.DATE_TIME) LocalDateTime endDate) {

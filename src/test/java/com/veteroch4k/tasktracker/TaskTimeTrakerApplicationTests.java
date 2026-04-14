@@ -1,4 +1,4 @@
-package com.veteroch4k.tasktraker;
+package com.veteroch4k.tasktracker;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

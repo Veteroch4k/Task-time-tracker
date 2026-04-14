@@ -1,4 +1,4 @@
-package com.veteroch4k.tasktraker.models;
+package com.veteroch4k.tasktracker.models;
 
 import java.time.LocalDateTime;
 import lombok.Data;
@@ -12,9 +12,9 @@ public class TimeRecord {
 
   private int taskId;
 
-  private LocalDateTime startDate;
+  private LocalDateTime startTime;
 
-  private LocalDateTime endDate;
+  private LocalDateTime endTime;
 
   private String description;
 

@@ -4,10 +4,13 @@ spring:
 
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/task_tracker
-    username: tz1еуые
-    password: tz1еуые
+    url: jdbc:postgresql://localhost:5433/task_tracker
+    username: root
+    password: root
 
+  liquibase:
+    change-log: classpath:/db/changelog/db.migrations-master.yaml
+    enabled: true
 
 
 mybatis:

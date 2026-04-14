@@ -1,4 +1,4 @@
-package com.veteroch4k.tasktraker.models.DTO;
+package com.veteroch4k.tasktracker.models.DTO;
 
 import java.time.LocalDateTime;
 
@@ -7,9 +7,9 @@ public record TimeRecordDTO (
 
      int taskId,
 
-     LocalDateTime startDate,
+     LocalDateTime startTime,
 
-     LocalDateTime endDate,
+     LocalDateTime endTime,
 
      String description
 ) {

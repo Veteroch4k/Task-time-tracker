@@ -1,4 +1,4 @@
-package com.veteroch4k.tasktraker.models;
+package com.veteroch4k.tasktracker.models;
 
 import lombok.Data;
 
@@ -12,7 +12,7 @@ public class Task {
 
   private String description;
 
-  private String status;
+  private TaskStatus status;
 
 }
 

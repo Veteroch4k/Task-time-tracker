@@ -1,0 +1,40 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-task-status-enum
+      author: Veteroch4k
+      changes:
+        - sql:
+            sql: "CREATE TYPE task_status AS ENUM ('NEW', 'IN_PROGRESS', 'DONE');"
+      rollback:
+        - sql:
+            sql: "DROP TYPE task_status;"
+  - changeSet:
+      id: create-tasks-table
+      author: Veteroch4k
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                  name: id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: name
+                  type: VARCHAR(100)
+              - column:
+                  constraints:
+                    nullable: true
+                  name: description
+                  type: TEXT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: status
+                  defaultValue: 'NEW'
+                  type: task_status
+            tableName: tasks

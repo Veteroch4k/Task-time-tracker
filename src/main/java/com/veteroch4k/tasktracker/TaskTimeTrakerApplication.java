@@ -1,4 +1,4 @@
-package com.veteroch4k.tasktraker;
+package com.veteroch4k.tasktracker;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

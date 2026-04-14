@@ -1,6 +1,6 @@
-package com.veteroch4k.tasktraker.controllers;
+package com.veteroch4k.tasktracker.controllers;
 
-import com.veteroch4k.tasktraker.models.DTO.TaskDTO;
+import com.veteroch4k.tasktracker.models.DTO.TaskDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
