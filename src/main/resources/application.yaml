@@ -8,6 +8,10 @@ spring:
     username: root
     password: root
 
+  sql:
+    init:
+      mode: always
+
   liquibase:
     change-log: classpath:/db/changelog/db.migrations-master.yaml
     enabled: true
