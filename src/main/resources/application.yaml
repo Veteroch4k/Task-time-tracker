@@ -1,3 +1,22 @@
 spring:
   application:
     name: task-time-traker
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/task_tracker
+    username: tz1
+    password: tz1
+
+
+
+mybatis:
+  type-aliases-package: com.veteroch4k.tasktracker.models
+
+
+server:
+  port: 8080
+logging:
+  level:
+    root: info
+    com.veteroch4k.tasktraker: DEBUG
