@@ -2,10 +2,12 @@ package com.veteroch4k.tasktracker.controllers;
 
 import com.veteroch4k.tasktracker.models.DTO.TaskDTO;
 import com.veteroch4k.tasktracker.models.Task;
+import com.veteroch4k.tasktracker.models.TaskStatus;
 import com.veteroch4k.tasktracker.services.TaskService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -30,8 +33,10 @@ public class TaskController {
 
   @Operation(summary = "Получение задачи по ID",
   description = "Возвращает объект задачи, если он найден в системе")
-  @ApiResponse(responseCode = "200", description = "Задача найдена")
-  @ApiResponse(responseCode = "404", description = "Задача отсутствует")
+  @ApiResponses(value = {
+      @ApiResponse(responseCode = "200", description = "Задача найдена"),
+      @ApiResponse(responseCode = "404", description = "Задача отсутствует")
+  })
   @GetMapping("/{id}")
   public ResponseEntity<Task> getTask(@Parameter(description = "ID задачи") @PathVariable Long id){
 
@@ -42,8 +47,10 @@ public class TaskController {
   }
 
   @Operation(summary = "Создать новую задачу")
-  @ApiResponse(responseCode = "201", description = "Задача успешно создана")
-  @ApiResponse(responseCode = "400", description = "Ошибка валидации входных данных")
+  @ApiResponses(value = {
+      @ApiResponse(responseCode = "201", description = "Задача успешно создана"),
+      @ApiResponse(responseCode = "400", description = "Ошибка валидации входных данных")
+  })
   @PostMapping
   public ResponseEntity<Task> createTask(@Parameter(description = "Данные новой задачи")
   @Valid @RequestBody TaskDTO taskDTO) {
@@ -54,9 +61,18 @@ public class TaskController {
   }
 
   @Operation(summary = "Обновить статус задачи ")
+  @ApiResponses(value = {
+      @ApiResponse(responseCode = "204", description = "Статус успешно обновлён"),
+      @ApiResponse(responseCode = "400", description = "Некорректный статус или формат данных"),
+      @ApiResponse(responseCode = "404", description = "Задача не найдена")
+  })
   @PatchMapping("/{id}/status")
-  public ResponseEntity<Void> changeStatus(@PathVariable Long id, @RequestBody String newStatus) {
-    return ResponseEntity.ok().build();
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  public void changeStatus(@Parameter(description = "ID обновляемой задачи") @PathVariable Long id,
+      @Parameter(description = "Новый статус задачи") @RequestBody TaskStatus newStatus) {
+
+    taskService.updateStatus(id, newStatus);
+
   }
 
 

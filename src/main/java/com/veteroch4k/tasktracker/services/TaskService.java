@@ -4,8 +4,10 @@ import com.veteroch4k.tasktracker.exceptions.ResourceNotFoundException;
 import com.veteroch4k.tasktracker.mappers.TaskMapper;
 import com.veteroch4k.tasktracker.models.DTO.TaskDTO;
 import com.veteroch4k.tasktracker.models.Task;
+import com.veteroch4k.tasktracker.models.TaskStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -30,6 +32,14 @@ public class TaskService {
     taskMapper.insert(task);
 
     return task;
+
+  }
+
+  public void updateStatus(Long id, TaskStatus status) {
+
+    boolean res = taskMapper.updateStatus(id, status);
+
+    if(!res) throw new ResourceNotFoundException("Задача с ID " + id + " не найдена");
 
   }
 
