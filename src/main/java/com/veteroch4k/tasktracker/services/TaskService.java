@@ -1,5 +1,6 @@
 package com.veteroch4k.tasktracker.services;
 
+import com.veteroch4k.tasktracker.exceptions.ResourceNotFoundException;
 import com.veteroch4k.tasktracker.mappers.TaskMapper;
 import com.veteroch4k.tasktracker.models.DTO.TaskDTO;
 import com.veteroch4k.tasktracker.models.Task;
@@ -15,7 +16,7 @@ public class TaskService {
   public Task getTask(Long id) {
 
     return taskMapper.getTaskById(id)
-        .orElseThrow(() -> new RuntimeException("Задача с ID " + id + " не найдена"));
+        .orElseThrow(() -> new ResourceNotFoundException("Задача с ID " + id + " не найдена"));
 
 
   }
