@@ -7,7 +7,6 @@ import com.veteroch4k.tasktracker.models.Task;
 import com.veteroch4k.tasktracker.models.TaskStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -27,7 +26,7 @@ public class TaskService {
     Task task = new Task();
     task.setName(taskDTO.name());
     task.setDescription(taskDTO.description());
-    task.setStatus(taskDTO.status());
+    task.setStatus(TaskStatus.NEW);
 
     taskMapper.insert(task);
 

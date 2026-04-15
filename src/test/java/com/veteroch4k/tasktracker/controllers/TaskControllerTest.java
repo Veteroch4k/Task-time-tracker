@@ -1,55 +1,25 @@
-package com.veteroch4k.tasktracker.controller;
+package com.veteroch4k.tasktracker.controllers;
 
+import com.veteroch4k.tasktracker.BaseIntegrationTest;
 import com.veteroch4k.tasktracker.mappers.TaskMapper;
 import com.veteroch4k.tasktracker.models.DTO.TaskDTO;
 import com.veteroch4k.tasktracker.models.Task;
 import com.veteroch4k.tasktracker.models.TaskStatus;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.DynamicPropertyRegistry;
-import org.springframework.test.context.DynamicPropertySource;
-import org.testcontainers.containers.PostgreSQLContainer;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-@ActiveProfiles("test") // Я так случайно забыл @DynamicPropertySource аннотацию добавить и фулл БДШку очистил под 0
-// Так что от греха подальше пусть будет тестовый профиль, если по какой-то случайности перехват DynamicPropertySource не сработает
-public class TaskControllerTest {
+public class TaskControllerTest extends BaseIntegrationTest {
 
   @LocalServerPort
   private Integer port;
 
-  static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>(
-      "postgres:16-alpine"
-  );
-
-  @BeforeAll
-  static void beforeAll() {
-    postgres.start();
-  }
-
-  @AfterAll
-  static void afterAll() {
-    postgres.stop();
-  }
-
-  @DynamicPropertySource
-  static void configureProperties(DynamicPropertyRegistry registry) {
-    registry.add("spring.datasource.url",() -> postgres.getJdbcUrl() + "&stringtype=unspecified");
-    registry.add("spring.datasource.username", postgres::getUsername);
-    registry.add("spring.datasource.password", postgres::getPassword);
-  }
 
   @Autowired
   TaskMapper taskMapper;
@@ -97,7 +67,7 @@ public class TaskControllerTest {
     String expectedDescription = "TestDesc";
     TaskStatus expectedStatus = TaskStatus.NEW;
 
-    TaskDTO newTask = new TaskDTO(expectedName, expectedDescription, expectedStatus);
+    TaskDTO newTask = new TaskDTO(expectedName, expectedDescription);
 
     given()
         .contentType(ContentType.JSON)
@@ -111,5 +81,29 @@ public class TaskControllerTest {
         .body("description", equalTo(expectedDescription))
         .body("status", equalTo(expectedStatus.name()));
   }
+
+  @Test
+  void shouldUpdateStatus() {
+
+    TaskStatus expectedStatus = TaskStatus.DONE;
+
+    Task task = new Task();
+    task.setName("Stub");
+    task.setStatus(TaskStatus.NEW);
+
+    taskMapper.insert(task);
+
+    Long id = task.getId();
+
+    given()
+        .contentType(ContentType.JSON)
+        .body("\"" + expectedStatus.name() + "\"")
+    .when()
+        .patch("/api/tasks/" + id.intValue() + "/status")
+    .then()
+        .statusCode(204);
+
+  }
+
 
 }

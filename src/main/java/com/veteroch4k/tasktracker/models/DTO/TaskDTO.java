@@ -1,9 +1,7 @@
 package com.veteroch4k.tasktracker.models.DTO;
 
-import com.veteroch4k.tasktracker.models.TaskStatus;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Schema(description = "Данные для создания или обновления задачи")
@@ -16,9 +14,6 @@ public record TaskDTO(
 
      @Schema(description = "Подробное описание задачи (сроки, важность задачи тд.)", example = "Необходимо собрать информацию о заказах из Новосибирска...")
      @Size(max = 1000, message = "Описание слишком длинное")
-     String description,
+     String description
 
-     @Schema(description = "Статус задачи", allowableValues = {"NEW", "IN_PROGRESS", "DONE"})
-     @NotNull(message = "Статус задачи должен быть указан")
-     TaskStatus status
 ) {}
