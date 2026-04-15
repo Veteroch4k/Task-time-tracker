@@ -10,7 +10,7 @@ spring:
 
   sql:
     init:
-      mode: always
+      mode: never
 
   liquibase:
     change-log: classpath:/db/changelog/db.migrations-master.yaml
