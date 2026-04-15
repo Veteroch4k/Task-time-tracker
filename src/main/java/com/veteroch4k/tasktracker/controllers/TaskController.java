@@ -7,9 +7,11 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,7 +44,8 @@ public class TaskController {
   @Operation(summary = "Создать новую задачу")
   @ApiResponse(responseCode = "201", description = "Задача успешно создана")
   @PostMapping
-  public ResponseEntity<Task> createTask(@Parameter(description = "Данные новой задачи") @RequestBody TaskDTO taskDTO) {
+  public ResponseEntity<Task> createTask(@Parameter(description = "Данные новой задачи")
+  @Valid @RequestBody TaskDTO taskDTO) {
 
     Task task = taskService.createTask(taskDTO);
 

@@ -1,7 +1,6 @@
 package com.veteroch4k.tasktracker.models;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
