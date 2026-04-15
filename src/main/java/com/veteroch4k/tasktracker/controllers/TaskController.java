@@ -3,6 +3,10 @@ package com.veteroch4k.tasktracker.controllers;
 import com.veteroch4k.tasktracker.models.DTO.TaskDTO;
 import com.veteroch4k.tasktracker.models.Task;
 import com.veteroch4k.tasktracker.services.TaskService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,12 +20,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/tasks")
 @RequiredArgsConstructor
+@Tag(name = "Task API", description = "API для управления задачами")
 public class TaskController {
 
   private final TaskService taskService;
 
+  @Operation(summary = "Получение задачи по ID",
+  description = "Возвращает объект задачи, если он найден в системе")
+  @ApiResponse(responseCode = "200", description = "Задача найден")
+  @ApiResponse(responseCode = "404", description = "Задача отсутствует")
   @GetMapping("/{id}")
-  public ResponseEntity<Task> getTask(@PathVariable Long id){
+  public ResponseEntity<Task> getTask(@Parameter(description = "ID задачи") @PathVariable Long id){
 
     Task task = taskService.getTask(id);
 
@@ -29,11 +38,14 @@ public class TaskController {
 
   }
 
+  @Operation(summary = "Создать новую задачу")
+  @ApiResponse(responseCode = "201", description = "Задача успешно создана")
   @PostMapping
   public ResponseEntity<Void> createTask(@RequestBody TaskDTO taskDTO) {
     return ResponseEntity.ok().build();
   }
 
+  @Operation(summary = "Обновить статус задачи ")
   @PatchMapping("/{id}/status")
   public ResponseEntity<Void> changeStatus(@PathVariable Long id, @RequestBody String newStatus) {
     return ResponseEntity.ok().build();
