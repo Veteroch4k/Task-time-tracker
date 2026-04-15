@@ -1,0 +1,22 @@
+package com.veteroch4k.tasktracker.services;
+
+import com.veteroch4k.tasktracker.mappers.TaskMapper;
+import com.veteroch4k.tasktracker.models.Task;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+public class TaskService {
+
+  private final TaskMapper taskMapper;
+
+  public Task getTask(Long id) {
+
+    return taskMapper.getTaskById(id)
+        .orElseThrow(() -> new RuntimeException("Задача с ID " + id + " не найдена"));
+
+
+  }
+
+}

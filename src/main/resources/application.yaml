@@ -16,7 +16,6 @@ spring:
     change-log: classpath:/db/changelog/db.migrations-master.yaml
     enabled: true
 
-
 mybatis:
   type-aliases-package: com.veteroch4k.tasktracker.models
 
