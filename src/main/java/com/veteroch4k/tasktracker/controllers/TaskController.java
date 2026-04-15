@@ -43,6 +43,7 @@ public class TaskController {
 
   @Operation(summary = "Создать новую задачу")
   @ApiResponse(responseCode = "201", description = "Задача успешно создана")
+  @ApiResponse(responseCode = "400", description = "Ошибка валидации входных данных")
   @PostMapping
   public ResponseEntity<Task> createTask(@Parameter(description = "Данные новой задачи")
   @Valid @RequestBody TaskDTO taskDTO) {
