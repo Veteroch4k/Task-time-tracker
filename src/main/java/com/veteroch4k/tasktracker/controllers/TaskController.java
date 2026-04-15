@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -27,7 +28,7 @@ public class TaskController {
 
   @Operation(summary = "Получение задачи по ID",
   description = "Возвращает объект задачи, если он найден в системе")
-  @ApiResponse(responseCode = "200", description = "Задача найден")
+  @ApiResponse(responseCode = "200", description = "Задача найдена")
   @ApiResponse(responseCode = "404", description = "Задача отсутствует")
   @GetMapping("/{id}")
   public ResponseEntity<Task> getTask(@Parameter(description = "ID задачи") @PathVariable Long id){
@@ -41,8 +42,11 @@ public class TaskController {
   @Operation(summary = "Создать новую задачу")
   @ApiResponse(responseCode = "201", description = "Задача успешно создана")
   @PostMapping
-  public ResponseEntity<Void> createTask(@RequestBody TaskDTO taskDTO) {
-    return ResponseEntity.ok().build();
+  public ResponseEntity<Task> createTask(@Parameter(description = "Данные новой задачи") @RequestBody TaskDTO taskDTO) {
+
+    Task task = taskService.createTask(taskDTO);
+
+    return ResponseEntity.status(HttpStatus.CREATED).body(task);
   }
 
   @Operation(summary = "Обновить статус задачи ")

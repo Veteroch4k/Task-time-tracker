@@ -1,6 +1,7 @@
 package com.veteroch4k.tasktracker.services;
 
 import com.veteroch4k.tasktracker.mappers.TaskMapper;
+import com.veteroch4k.tasktracker.models.DTO.TaskDTO;
 import com.veteroch4k.tasktracker.models.Task;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,18 @@ public class TaskService {
     return taskMapper.getTaskById(id)
         .orElseThrow(() -> new RuntimeException("Задача с ID " + id + " не найдена"));
 
+
+  }
+
+  public Task createTask(TaskDTO taskDTO) {
+    Task task = new Task();
+    task.setName(taskDTO.name());
+    task.setDescription(taskDTO.description());
+    task.setStatus(taskDTO.status());
+
+    taskMapper.insert(task);
+
+    return task;
 
   }
 
