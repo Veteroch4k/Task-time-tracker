@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: drop-not-null-end_time-time_records-table
+      author: Veteroch4k
+      changes:
+        - dropNotNullConstraint:
+            tableName: time_records
+            columnName: end_time
