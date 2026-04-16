@@ -10,5 +10,9 @@ databaseChangeLog:
 # v1.1
 
   - include:
-      file: v1.1/drop-not-null-end_time-time_records-table.yaml
+      file: v1.1/add-not-null-end_time-time_records-table.yaml
+      relativeToChangelogFile: true
+
+  - include:
+      file: v1.1/add-check-start-end-time-time_records-table.yaml
       relativeToChangelogFile: true

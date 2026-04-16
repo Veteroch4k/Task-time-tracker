@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 public record TimeRecordRequestDTO(
 
     @Schema(description = "ID сотрудника, выполнявшего задачу",
-        nullable = true, example = "12")
+        example = "12")
     Long employeeId,
 
     @Schema(description = "ID выполняемой задачи",

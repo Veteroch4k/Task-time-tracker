@@ -1,8 +1,9 @@
 databaseChangeLog:
   - changeSet:
-      id: drop-not-null-end_time-time_records-table
+      id: add-not-null-end_time-time_records-table
       author: Veteroch4k
       changes:
-        - dropNotNullConstraint:
+        - addNotNullConstraint:
             tableName: time_records
             columnName: end_time
+            columnDataType: TIMESTAMP WITH TIME ZONE

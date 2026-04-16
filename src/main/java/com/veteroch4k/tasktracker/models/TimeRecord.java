@@ -9,11 +9,11 @@ import lombok.Data;
 public class TimeRecord {
 
   @Schema(description = "Уникальный идентификатор записи",
-  example = "123")
+      example = "123")
   private Long id;
 
   @Schema(description = "ID сотрудника, выполнявшего задачу",
-  nullable = true, example = "12")
+      example = "12")
   private Long employeeId;
 
   @Schema(description = "ID выполняемой задачи",
@@ -21,11 +21,11 @@ public class TimeRecord {
   private Long taskId;
 
   @Schema(description = "Время начала работы над задачи",
-  example = "2007-12-03T10:15:30")
+  example = "2007-12-03T10:15:30", maximum = "end_Time")
   private LocalDateTime startTime;
 
   @Schema(description = "Время окончания работы над задачей",
-      example = "2007-12-03T10:15:30")
+      example = "2007-12-03T10:15:30", minimum = "start_Time")
   private LocalDateTime endTime;
 
   @Schema(description = "Описание проделанной работы",

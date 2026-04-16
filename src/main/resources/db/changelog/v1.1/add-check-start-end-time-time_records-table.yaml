@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-check-start-end-time-time_records-table
+      author: Veteroch4k
+      changes:
+        - sql:
+            sql: "ALTER TABLE time_records ADD CONSTRAINT chk_time_records_start_before_end CHECK(start_time < end_time);"
