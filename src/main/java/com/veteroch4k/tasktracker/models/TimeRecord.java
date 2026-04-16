@@ -2,6 +2,7 @@ package com.veteroch4k.tasktracker.models;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import lombok.Data;
 
 @Data
@@ -21,12 +22,12 @@ public class TimeRecord {
   private Long taskId;
 
   @Schema(description = "Время начала работы над задачи",
-  example = "2007-12-03T10:15:30", maximum = "end_Time")
-  private LocalDateTime startTime;
+  example = "2007-12-03T10:15:30+01:00", maximum = "end_Time")
+  private OffsetDateTime startTime;
 
   @Schema(description = "Время окончания работы над задачей",
-      example = "2007-12-03T10:15:30", minimum = "start_Time")
-  private LocalDateTime endTime;
+      example = "2007-12-03T10:15:30+01:00", minimum = "start_Time")
+  private OffsetDateTime endTime;
 
   @Schema(description = "Описание проделанной работы",
       example = "Было проделано...")
