@@ -1,4 +1,4 @@
-package com.veteroch4k.tasktracker;
+package com.veteroch4k.tasktracker.controllers;
 
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;

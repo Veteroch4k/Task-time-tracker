@@ -1,6 +1,6 @@
 package com.veteroch4k.tasktracker.controllers;
 
-import com.veteroch4k.tasktracker.models.DTO.TaskDTO;
+import com.veteroch4k.tasktracker.models.DTO.TaskRequestDTO;
 import com.veteroch4k.tasktracker.models.Task;
 import com.veteroch4k.tasktracker.models.TaskStatus;
 import com.veteroch4k.tasktracker.services.TaskService;
@@ -13,7 +13,6 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -53,9 +52,9 @@ public class TaskController {
   })
   @PostMapping
   public ResponseEntity<Task> createTask(@Parameter(description = "Данные новой задачи")
-  @Valid @RequestBody TaskDTO taskDTO) {
+  @Valid @RequestBody TaskRequestDTO taskRequestDTO) {
 
-    Task task = taskService.createTask(taskDTO);
+    Task task = taskService.createTask(taskRequestDTO);
 
     return ResponseEntity.status(HttpStatus.CREATED).body(task);
   }

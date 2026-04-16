@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 @Schema(description = "Данные для создания или обновления задачи")
-public record TaskDTO(
+public record TaskRequestDTO(
 
      @Schema(description = "Название задачи", example = "Создание отчета за прошедший квартал...")
      @NotBlank(message = "Название задачи не может быть пустым")

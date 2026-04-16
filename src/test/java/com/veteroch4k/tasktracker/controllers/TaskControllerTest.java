@@ -1,8 +1,7 @@
 package com.veteroch4k.tasktracker.controllers;
 
-import com.veteroch4k.tasktracker.BaseIntegrationTest;
 import com.veteroch4k.tasktracker.mappers.TaskMapper;
-import com.veteroch4k.tasktracker.models.DTO.TaskDTO;
+import com.veteroch4k.tasktracker.models.DTO.TaskRequestDTO;
 import com.veteroch4k.tasktracker.models.Task;
 import com.veteroch4k.tasktracker.models.TaskStatus;
 import io.restassured.RestAssured;
@@ -80,7 +79,7 @@ public class TaskControllerTest extends BaseIntegrationTest {
     String expectedDescription = "TestDesc";
     TaskStatus expectedStatus = TaskStatus.NEW;
 
-    TaskDTO newTask = new TaskDTO(expectedName, expectedDescription);
+    TaskRequestDTO newTask = new TaskRequestDTO(expectedName, expectedDescription);
 
     given()
         .contentType(ContentType.JSON)
@@ -99,7 +98,7 @@ public class TaskControllerTest extends BaseIntegrationTest {
   void shouldReturn400WhenInvalidArgumentCreatingTask() {
 
     String invalidName = "";
-    TaskDTO invalidTask = new TaskDTO(invalidName, "");
+    TaskRequestDTO invalidTask = new TaskRequestDTO(invalidName, "");
 
     given()
         .contentType(ContentType.JSON)

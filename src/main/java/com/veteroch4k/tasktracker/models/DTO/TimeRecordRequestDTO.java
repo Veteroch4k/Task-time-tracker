@@ -2,10 +2,10 @@ package com.veteroch4k.tasktracker.models.DTO;
 
 import java.time.LocalDateTime;
 
-public record TimeRecordDTO (
-     int employeeId,
+public record TimeRecordRequestDTO(
+     Long employeeId,
 
-     int taskId,
+     Long taskId,
 
      LocalDateTime startTime,
 

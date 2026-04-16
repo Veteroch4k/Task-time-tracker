@@ -2,7 +2,7 @@ package com.veteroch4k.tasktracker.services;
 
 import com.veteroch4k.tasktracker.exceptions.ResourceNotFoundException;
 import com.veteroch4k.tasktracker.mappers.TaskMapper;
-import com.veteroch4k.tasktracker.models.DTO.TaskDTO;
+import com.veteroch4k.tasktracker.models.DTO.TaskRequestDTO;
 import com.veteroch4k.tasktracker.models.Task;
 import com.veteroch4k.tasktracker.models.TaskStatus;
 import lombok.RequiredArgsConstructor;
@@ -22,10 +22,10 @@ public class TaskService {
 
   }
 
-  public Task createTask(TaskDTO taskDTO) {
+  public Task createTask(TaskRequestDTO taskRequestDTO) {
     Task task = new Task();
-    task.setName(taskDTO.name());
-    task.setDescription(taskDTO.description());
+    task.setName(taskRequestDTO.name());
+    task.setDescription(taskRequestDTO.description());
     task.setStatus(TaskStatus.NEW);
 
     taskMapper.insert(task);

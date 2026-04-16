@@ -8,9 +8,9 @@ public class TimeRecord {
 
   private Long id;
 
-  private int employeeId;
+  private Long employeeId;
 
-  private int taskId;
+  private Long taskId;
 
   private LocalDateTime startTime;
 
