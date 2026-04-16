@@ -59,6 +59,19 @@ public class TaskControllerTest extends BaseIntegrationTest {
 
   }
 
+  @Test
+  void shouldReturn404WhenTaskNotFound() {
+
+    long notExistingId = 1489L;
+
+    given()
+        .contentType(ContentType.JSON)
+    .when()
+        .get("/api/tasks/" + notExistingId)
+    .then()
+        .statusCode(404);
+  }
+
 
   @Test
   void shouldCreateTask() {
@@ -83,6 +96,22 @@ public class TaskControllerTest extends BaseIntegrationTest {
   }
 
   @Test
+  void shouldReturn400WhenInvalidArgumentCreatingTask() {
+
+    String invalidName = "";
+    TaskDTO invalidTask = new TaskDTO(invalidName, "");
+
+    given()
+        .contentType(ContentType.JSON)
+        .body(invalidTask)
+    .when()
+        .post("/api/tasks")
+    .then()
+        .statusCode(400);
+
+  }
+
+  @Test
   void shouldUpdateStatus() {
 
     TaskStatus expectedStatus = TaskStatus.DONE;
@@ -102,6 +131,36 @@ public class TaskControllerTest extends BaseIntegrationTest {
         .patch("/api/tasks/" + id.intValue() + "/status")
     .then()
         .statusCode(204);
+
+  }
+
+  @Test
+  void shouldReturn400WhenInvalidArgumentUpdatingStatus() {
+    String invalidStatus = "Botswana";
+
+    given()
+        .contentType(ContentType.JSON)
+        .body("\"" + invalidStatus + "\"")
+    .when()
+        .patch("/api/tasks/" + 1 + "/status")
+    .then()
+        .statusCode(400);
+
+  }
+
+  @Test
+  void shouldReturn404WhenTaskNotFoundUpdatingStatus() {
+    String status = TaskStatus.DONE.name();
+
+    long invalidId = 1489; // я не добавил никаких записей, так что БД пустая и в любом случае ничего не найдет
+
+    given()
+        .contentType(ContentType.JSON)
+        .body("\"" + status + "\"")
+        .when()
+        .patch("/api/tasks/" + invalidId + "/status")
+        .then()
+        .statusCode(404);
 
   }
 
