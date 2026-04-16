@@ -16,6 +16,12 @@ spring:
     change-log: classpath:/db/changelog/db.migrations-master.yaml
     enabled: true
 
+jwt:
+  secret:
+    access: 7YD+r7kLLg6v+f69GAUto0bh0JeYavEcJbk8qyrUBhLf0bp5vATCPsTE/XoH+vOKf1zYfobNH41zbgdl+kI8oQ==
+    refresh: GMOFSSwnQb18+GwWj/tbAp0KKZ963Cn4IV7zmdFkcDCaBQKnHXP3rADKHCQUNzNBFIIACfgZLuE3jYNmpsfeyg==
+
+
 mybatis:
   type-aliases-package: com.veteroch4k.tasktracker.models
 
