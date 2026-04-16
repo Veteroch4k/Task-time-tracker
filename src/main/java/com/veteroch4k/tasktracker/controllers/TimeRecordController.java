@@ -1,6 +1,6 @@
 package com.veteroch4k.tasktracker.controllers;
 
-import com.veteroch4k.tasktracker.models.DTO.TimeRecordDTO;
+import com.veteroch4k.tasktracker.models.DTO.TimeRecordRequestDTO;
 import java.time.LocalDateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TimeRecordController {
 
   @PostMapping
-  public ResponseEntity<Void> createLogTime(@RequestBody TimeRecordDTO timeRecordDTO) {
+  public ResponseEntity<Void> createLogTime(@RequestBody TimeRecordRequestDTO timeRecordRequestDTO) {
 
     return ResponseEntity.ok().build();
   }
