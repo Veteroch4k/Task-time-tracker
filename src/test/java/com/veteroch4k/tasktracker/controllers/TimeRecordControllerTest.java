@@ -22,9 +22,6 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 
 public class TimeRecordControllerTest extends BaseIntegrationTest {
 
-  @LocalServerPort
-  private Integer port;
-
   @Autowired
   TimeRecordMapper TimeRecordmapper;
 
@@ -33,7 +30,6 @@ public class TimeRecordControllerTest extends BaseIntegrationTest {
 
   @BeforeEach
   void setUp() {
-    RestAssured.baseURI = "http://localhost:" + port;
     taskMapper.deleteAll();
   }
 

@@ -16,15 +16,12 @@ import static org.hamcrest.Matchers.*;
 
 public class TaskControllerTest extends BaseIntegrationTest {
 
-  @LocalServerPort
-  private Integer port;
 
   @Autowired
   TaskMapper taskMapper;
 
   @BeforeEach
   void setUp() {
-    RestAssured.baseURI = "http://localhost:" + port;
     taskMapper.deleteAll();
   }
 
