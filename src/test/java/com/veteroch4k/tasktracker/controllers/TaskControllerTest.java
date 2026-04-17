@@ -19,7 +19,6 @@ public class TaskControllerTest extends BaseIntegrationTest {
   @LocalServerPort
   private Integer port;
 
-
   @Autowired
   TaskMapper taskMapper;
 

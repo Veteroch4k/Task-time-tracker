@@ -42,7 +42,7 @@ public class TimeRecordController {
       @ApiResponse(responseCode = "400", description = "Ошибка валидации входных данных")
   })
   @PostMapping
-  public ResponseEntity<TimeRecord> createLogTime(@Parameter(description = "Данные о времени работы")
+  public ResponseEntity<TimeRecord> createTimeRecord(@Parameter(description = "Данные о времени работы")
       @Valid @RequestBody TimeRecordRequestDTO timeRecordRequestDTO) {
 
     TimeRecord record = service.createTimeRecord(timeRecordRequestDTO);

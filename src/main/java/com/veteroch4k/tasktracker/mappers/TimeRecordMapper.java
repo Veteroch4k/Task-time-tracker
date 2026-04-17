@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Optional;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
@@ -26,5 +27,9 @@ public interface TimeRecordMapper {
 
   @Select("SELECT EXISTS(SELECT 1 FROM time_records WHERE employee_id = #{employeeId})")
   boolean existsByEmployeeId(@Param("employeeId") Long employeeId);
+
+  @Delete("DELETE FROM time_records")
+  void deleteAll();
+
 
 }

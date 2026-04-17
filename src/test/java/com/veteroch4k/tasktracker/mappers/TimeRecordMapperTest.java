@@ -158,8 +158,8 @@ public class TimeRecordMapperTest extends BaseMapperTest{
 
     recordMapper.insert(record);
 
-    boolean exists = recordMapper.existsById(record.getEmployeeId());
-    boolean nonExists = recordMapper.existsById(-1L);
+    boolean exists = recordMapper.existsByEmployeeId(record.getEmployeeId());
+    boolean nonExists = recordMapper.existsByEmployeeId(-1L);
 
     assertTrue(exists);
     assertFalse(nonExists);
