@@ -144,7 +144,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"employeeId\": 1,\r\n  \"taskId\": 1,\r\n  \"startTime\": \"2025-09-03T10:15:30Z\",\r\n  \"endTime\": \"2025-10-03T10:15:30Z\",\r\n  \"description\": \"Было проделано...\"\r\n}",
+              "raw": "{\r\n  \"employeeId\": 1,\r\n  \"taskId\": 1,\r\n  \"startTime\": \"{{startTime}}\",\r\n  \"endTime\": \"{{endTime}}\",\r\n  \"description\": \"Было проделано...\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -170,7 +170,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/time-record/{{emplId}}?startTime=2025-09-03T10:15:30Z&endTime=2025-10-03T10:15:30Z",
+              "raw": "{{baseUrl}}/time-record/{{emplId}}?startTime={{startTime}}&endTime={{endTime}}",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -181,11 +181,11 @@
               "query": [
                 {
                   "key": "startTime",
-                  "value": "2025-09-03T10:15:30Z"
+                  "value": "{{startTime}}"
                 },
                 {
                   "key": "endTime",
-                  "value": "2025-10-03T10:15:30Z"
+                  "value": "{{endTime}}"
                 }
               ]
             }
@@ -227,7 +227,7 @@
     "bearer": [
       {
         "key": "token",
-        "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMSIsImV4cCI6MTc3NjQzODk2NywiZmlyc3ROYW1lIjoidXNlcjEiLCJyb2xlcyI6WyJVU0VSIl19.SHVGQ3fI8vbjIVF5B1aFUeMQBb4pg-mg01YObHxWhxv7XJwrXz5aZfl1OUjjN6ybcChLVZgf09CHWuX-d_JgKg",
+        "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMSIsImV4cCI6MTc3NjQ0Mjg2NSwiZmlyc3ROYW1lIjoidXNlcjEiLCJyb2xlcyI6WyJVU0VSIl19.A-2tn809DVCFjI9vn1QHAbzw3dzfxYbbD1Z7rqMs9Pitk0PFQFgF_9pQC9DCnWH9Gpt2Is1FJ_Y12DplU_E1WQ",
         "type": "string"
       }
     ]
@@ -267,6 +267,14 @@
     },
     {
       "key": "emplId",
+      "value": ""
+    },
+    {
+      "key": "startTime",
+      "value": ""
+    },
+    {
+      "key": "endTime",
       "value": ""
     }
   ]
