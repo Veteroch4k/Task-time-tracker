@@ -1,7 +1,6 @@
 package com.veteroch4k.tasktracker.mappers;
 
 import com.veteroch4k.tasktracker.models.TimeRecord;
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -27,6 +26,9 @@ public interface TimeRecordMapper {
 
   @Select("SELECT EXISTS(SELECT 1 FROM time_records WHERE employee_id = #{employeeId})")
   boolean existsByEmployeeId(@Param("employeeId") Long employeeId);
+
+  @Select("SELECT * FROM time_records WHERE id = #{id}")
+  Optional<TimeRecord> getRecordById(@Param("id") Long id);
 
   @Delete("DELETE FROM time_records")
   void deleteAll();

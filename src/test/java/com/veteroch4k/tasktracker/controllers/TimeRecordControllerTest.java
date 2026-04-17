@@ -2,14 +2,14 @@ package com.veteroch4k.tasktracker.controllers;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.notNullValue;
-
 import com.veteroch4k.tasktracker.mappers.TaskMapper;
 import com.veteroch4k.tasktracker.mappers.TimeRecordMapper;
 import com.veteroch4k.tasktracker.models.DTO.TimeRecordRequestDTO;
 import com.veteroch4k.tasktracker.models.Task;
 import com.veteroch4k.tasktracker.models.TaskStatus;
-import com.veteroch4k.tasktracker.services.TimeRecordService;
+import com.veteroch4k.tasktracker.models.TimeRecord;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import java.time.OffsetDateTime;
@@ -93,5 +93,93 @@ public class TimeRecordControllerTest extends BaseIntegrationTest {
     .then()
         .statusCode(400);
   }
+
+  @Test
+  void shouldGetEmployeeTimeRecordsBetweenTime() {
+
+    Task task = new Task();
+    task.setName("test");
+    task.setStatus(TaskStatus.NEW);
+    taskMapper.insert(task);
+
+    Long taskId = task.getId();
+    Long employeeId = 1L;
+    OffsetDateTime startTime = OffsetDateTime.now();
+    OffsetDateTime endTime = startTime.plusDays(10);
+    String description = "test";
+
+    TimeRecord record1 = new TimeRecord();
+    record1.setEmployeeId(employeeId);
+    record1.setTaskId(taskId);
+    record1.setStartTime(startTime.plusDays(3));
+    record1.setEndTime(endTime.plusDays(3));
+    record1.setDescription(description);
+
+    TimeRecord record2 = new TimeRecord();
+    record2.setEmployeeId(employeeId);
+    record2.setTaskId(taskId);
+    record2.setStartTime(startTime.minusDays(3));
+    record2.setEndTime(endTime.minusDays(3));
+    record2.setDescription(description);
+
+    TimeRecordmapper.insert(record1);
+    TimeRecordmapper.insert(record2);
+
+    int resultSize = 2;
+
+    given()
+        .log().all()
+        .contentType(ContentType.JSON)
+    .when()
+        .get("/api/time-record/" + employeeId + "?startTime=" + startTime + "&endTime=" + endTime)
+    .then()
+        .statusCode(200)
+        .body("records", hasSize(resultSize))
+        .body("recordsCount", equalTo(resultSize));
+
+  }
+
+  @Test
+  void shouldReturn400WhenValidationErrorGettingStatsOfEmployee() {
+
+    long employeeId = 1;
+    OffsetDateTime endTime = OffsetDateTime.now();
+    OffsetDateTime incorrectStartTime = endTime.plusDays(1);
+
+    given()
+        .log().all()
+        .contentType(ContentType.JSON)
+        .when()
+        .get("/api/time-record/" + employeeId + "?startTime=" + incorrectStartTime + "&endTime=" + endTime)
+        .then()
+        .statusCode(400);
+
+  }
+
+  @Test
+  void shouldReturn404WhenNoSuchEmployeeGettingStatsOfEmployee() {
+
+    Task task = new Task();
+    task.setName("test");
+    task.setStatus(TaskStatus.NEW);
+    taskMapper.insert(task);
+
+    Long taskId = task.getId();
+    Long employeeId = 1L;
+    OffsetDateTime startTime = OffsetDateTime.now();
+    OffsetDateTime endTime = startTime.plusDays(10);
+    String description = "test";
+
+    given()
+        .log().all()
+        .contentType(ContentType.JSON)
+        .when()
+        .get("/api/time-record/" + (employeeId + 1) + "?startTime=" + startTime + "&endTime=" + endTime)
+        .then()
+        .statusCode(404);
+
+
+  }
+
 
 }

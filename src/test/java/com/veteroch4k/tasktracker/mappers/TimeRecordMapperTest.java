@@ -9,7 +9,10 @@ import com.veteroch4k.tasktracker.models.Task;
 import com.veteroch4k.tasktracker.models.TaskStatus;
 import com.veteroch4k.tasktracker.models.TimeRecord;
 import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -166,6 +169,66 @@ public class TimeRecordMapperTest extends BaseMapperTest{
 
   }
 
+  @Test
+  void shouldGetRecordById() {
+
+    Task task = new Task();
+    task.setName("test");
+    task.setStatus(TaskStatus.NEW);
+    taskMapper.insert(task);
+
+    long taskId = task.getId();
+
+    TimeRecord record = new TimeRecord();
+    record.setEmployeeId(1L);
+    record.setTaskId(taskId);
+    record.setStartTime(OffsetDateTime.now(ZoneOffset.UTC).truncatedTo(ChronoUnit.MILLIS));
+    record.setEndTime(OffsetDateTime.now(ZoneOffset.UTC).plusDays(1).truncatedTo(ChronoUnit.MILLIS));
+    record.setDescription("test");
+
+    recordMapper.insert(record);
+
+    Optional<TimeRecord> timeRecord = recordMapper.getRecordById(record.getId());
+
+    assertTrue(timeRecord.isPresent());
+
+    TimeRecord res = timeRecord.get();
+
+    assertEquals(res.getEmployeeId(), record.getEmployeeId());
+    assertEquals(res.getTaskId(), record.getTaskId());
+    assertEquals(res.getStartTime(), record.getStartTime());
+    assertEquals(res.getEndTime(), record.getEndTime());
+    assertEquals(res.getDescription(), record.getDescription());
+
+  }
+
+  @Test
+  void shouldDeleteAll() {
+
+    Task task = new Task();
+    task.setName("test");
+    task.setStatus(TaskStatus.NEW);
+    taskMapper.insert(task);
+
+    long taskId = task.getId();
+
+    TimeRecord record = new TimeRecord();
+    record.setEmployeeId(1L);
+    record.setTaskId(taskId);
+    record.setStartTime(OffsetDateTime.now());
+    record.setEndTime(OffsetDateTime.now().plusDays(1));
+    record.setDescription("test");
+
+    recordMapper.insert(record);
+
+    recordMapper.deleteAll();
+
+    Optional<TimeRecord> timeRecord = recordMapper.getRecordById(record.getId());
+
+    assertFalse(timeRecord.isPresent());
+
+
+  }
 
 
 }

@@ -24,6 +24,8 @@ jwt:
 
 mybatis:
   type-aliases-package: com.veteroch4k.tasktracker.models
+  configuration:
+    map-underscore-to-camel-case: true
 
 springdoc:
   swagger-ui:

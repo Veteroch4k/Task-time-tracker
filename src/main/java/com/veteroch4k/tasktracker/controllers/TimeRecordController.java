@@ -60,10 +60,10 @@ public class TimeRecordController {
   @GetMapping("/{empId}")
   public ResponseEntity<EmployeeStatsDTO> getEmployeeTimeRecordsBetweenTime(
       @Parameter(description = "ID рассматриваемого сотрудника") @PathVariable("empId") Long empId,
-      @Parameter(description = "Начало временного интервала") @RequestParam @DateTimeFormat(iso = ISO.DATE_TIME) OffsetDateTime startDate,
-      @Parameter(description = "Конец временного интервала") @RequestParam @DateTimeFormat(iso = ISO.DATE_TIME) OffsetDateTime endDate) {
+      @Parameter(description = "Начало временного интервала") @RequestParam("startTime") @DateTimeFormat(iso = ISO.DATE_TIME) OffsetDateTime startTime,
+      @Parameter(description = "Конец временного интервала") @RequestParam("endTime") @DateTimeFormat(iso = ISO.DATE_TIME) OffsetDateTime endTime) {
 
-    EmployeeStatsDTO stats = service.getStatisticsOfEmployee(empId, startDate, endDate);
+    EmployeeStatsDTO stats = service.getStatisticsOfEmployee(empId, startTime, endTime);
 
     return ResponseEntity.ok(stats);
 
