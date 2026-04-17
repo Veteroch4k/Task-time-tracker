@@ -30,14 +30,14 @@ public class TaskController {
 
   private final TaskService taskService;
 
-  @Operation(summary = "Получение задачи по ID",
+  @Operation(summary = "Получить задачу по ID",
   description = "Возвращает объект задачи, если он найден в системе")
   @ApiResponses(value = {
       @ApiResponse(responseCode = "200", description = "Задача найдена"),
       @ApiResponse(responseCode = "404", description = "Задача отсутствует")
   })
   @GetMapping("/{id}")
-  public ResponseEntity<Task> getTask(@Parameter(description = "ID задачи") @PathVariable Long id){
+  public ResponseEntity<Task> getTask(@Parameter(description = "ID задачи") @PathVariable("id") Long id){
 
     Task task = taskService.getTask(id);
 
@@ -59,7 +59,7 @@ public class TaskController {
     return ResponseEntity.status(HttpStatus.CREATED).body(task);
   }
 
-  @Operation(summary = "Обновить статус задачи ")
+  @Operation(summary = "Изменить статус задачи ")
   @ApiResponses(value = {
       @ApiResponse(responseCode = "204", description = "Статус успешно обновлён"),
       @ApiResponse(responseCode = "400", description = "Некорректный статус или формат данных"),
@@ -67,7 +67,7 @@ public class TaskController {
   })
   @PatchMapping("/{id}/status")
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void changeStatus(@Parameter(description = "ID обновляемой задачи") @PathVariable Long id,
+  public void changeStatus(@Parameter(description = "ID обновляемой задачи") @PathVariable("id") Long id,
       @Parameter(description = "Новый статус задачи") @RequestBody TaskStatus newStatus) {
 
     taskService.updateStatus(id, newStatus);

@@ -57,10 +57,26 @@ public class GlobalExceptionHandler {
         LocalDateTime.now(),
         HttpStatus.BAD_REQUEST.value(),
         "Malformed JSON Request",
-        "Переданы некорректные данные или формат. Убедитесь, что статусы и другие поля корректны"
+        e.getMessage()
     );
 
     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
 
   }
+
+  @ExceptionHandler(IllegalArgumentException.class)
+  public ResponseEntity<ErrorResponse> handleIllegalArgumentException(IllegalArgumentException e) {
+
+    ErrorResponse errorResponse = new ErrorResponse(
+        LocalDateTime.now(),
+        HttpStatus.BAD_REQUEST.value(),
+        "Bad Request",
+        e.getMessage()
+    );
+
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+
+
+  }
+
 }

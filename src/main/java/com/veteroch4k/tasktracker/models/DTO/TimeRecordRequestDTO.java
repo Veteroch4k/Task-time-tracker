@@ -1,11 +1,12 @@
 package com.veteroch4k.tasktracker.models.DTO;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 
+@Schema(description = "Данные для создания или обновления записи о затраченном времени сотрудника на задачу")
 public record TimeRecordRequestDTO(
 
     @Schema(description = "ID сотрудника, выполнявшего задачу",
@@ -27,10 +28,12 @@ public record TimeRecordRequestDTO(
 
     @Schema(description = "Время окончания работы над задачей",
         example = "2007-12-03T10:15:30+01:00")
+    @NotNull(message = "Время окончания работы должно быть обязательно указано")
     OffsetDateTime endTime,
 
     @Schema(description = "Описание проделанной работы",
         example = "Было проделано...")
+    @NotBlank(message = "Описание проделанной работы не может быть пустым")
     String description
 
 ) {}

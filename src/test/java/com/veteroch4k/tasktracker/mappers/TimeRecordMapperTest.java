@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import com.veteroch4k.tasktracker.models.Task;
 import com.veteroch4k.tasktracker.models.TaskStatus;
 import com.veteroch4k.tasktracker.models.TimeRecord;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +32,8 @@ public class TimeRecordMapperTest extends BaseMapperTest{
     TimeRecord record = new TimeRecord();
     record.setEmployeeId(1L);
     record.setTaskId(taskId);
-    record.setStartTime(LocalDateTime.now());
-    record.setEndTime(LocalDateTime.now());
+    record.setStartTime(OffsetDateTime.now());
+    record.setEndTime(OffsetDateTime.now());
     record.setDescription("test");
 
     recordMapper.insert(record);
@@ -56,8 +56,8 @@ public class TimeRecordMapperTest extends BaseMapperTest{
       */
 
     long employeeId = 7L;
-    LocalDateTime startTime = LocalDateTime.now();
-    LocalDateTime endTime = startTime.plusDays(5);
+    OffsetDateTime startTime = OffsetDateTime.now();
+    OffsetDateTime endTime = startTime.plusDays(5);
     int resultCountOfRecords = 5;
 
     Task task = new Task();
@@ -136,6 +136,8 @@ public class TimeRecordMapperTest extends BaseMapperTest{
     assertEquals(resultCountOfRecords, result.size());
 
   }
+
+
 
 
 

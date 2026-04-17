@@ -2,6 +2,7 @@ package com.veteroch4k.tasktracker.mappers;
 
 import com.veteroch4k.tasktracker.models.TimeRecord;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.List;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -20,6 +21,9 @@ public interface TimeRecordMapper {
   @Select("SELECT * FROM time_records WHERE employee_id = #{employeeId}"
       + " AND start_time < #{end} AND end_time > #{start} ")
   List<TimeRecord> getAllByStartTimeBetween(@Param("employeeId") Long employeeId,
-      @Param("start") LocalDateTime start, @Param("end") LocalDateTime end);
+      @Param("start") OffsetDateTime start, @Param("end") OffsetDateTime end);
+
+  @Select("SELECT * FROM time_records WHERE employee_id = #{employeeId}")
+  boolean existsById(@Param("employeeId") Long employeeId);
 
 }

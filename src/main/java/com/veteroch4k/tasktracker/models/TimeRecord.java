@@ -6,7 +6,7 @@ import java.time.OffsetDateTime;
 import lombok.Data;
 
 @Data
-@Schema(description = "Модель записи времени работы над задачей")
+@Schema(description = "Модель записи о затраченном времени сотрудника на задачу")
 public class TimeRecord {
 
   @Schema(description = "Уникальный идентификатор записи",
