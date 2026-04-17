@@ -1,7 +1,9 @@
 package com.veteroch4k.tasktracker.mappers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.veteroch4k.tasktracker.models.Task;
 import com.veteroch4k.tasktracker.models.TaskStatus;
@@ -33,7 +35,7 @@ public class TimeRecordMapperTest extends BaseMapperTest{
     record.setEmployeeId(1L);
     record.setTaskId(taskId);
     record.setStartTime(OffsetDateTime.now());
-    record.setEndTime(OffsetDateTime.now());
+    record.setEndTime(OffsetDateTime.now().plusDays(1));
     record.setDescription("test");
 
     recordMapper.insert(record);
@@ -137,7 +139,32 @@ public class TimeRecordMapperTest extends BaseMapperTest{
 
   }
 
+  @Test
+  void shouldCheckIfExistsById() {
 
+    Task task = new Task();
+    task.setName("test");
+    task.setStatus(TaskStatus.NEW);
+    taskMapper.insert(task);
+
+    long taskId = task.getId();
+
+    TimeRecord record = new TimeRecord();
+    record.setEmployeeId(1L);
+    record.setTaskId(taskId);
+    record.setStartTime(OffsetDateTime.now());
+    record.setEndTime(OffsetDateTime.now().plusDays(1));
+    record.setDescription("test");
+
+    recordMapper.insert(record);
+
+    boolean exists = recordMapper.existsById(record.getEmployeeId());
+    boolean nonExists = recordMapper.existsById(-1L);
+
+    assertTrue(exists);
+    assertFalse(nonExists);
+
+  }
 
 
 

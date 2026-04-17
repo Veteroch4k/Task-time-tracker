@@ -39,7 +39,9 @@ public class TimeRecordService {
       throw new IllegalArgumentException("Дата начала не может быть позже даты окончания");
     }
 
-    if (!mapper.existsById(employeeId)) {
+    boolean exist = mapper.existsByEmployeeId(employeeId);
+
+    if (!exist) {
       throw new ResourceNotFoundException("Сотрудник с ID " + employeeId + " не найден в системе");
     }
 
