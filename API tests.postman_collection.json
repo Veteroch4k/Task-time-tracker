@@ -227,7 +227,7 @@
     "bearer": [
       {
         "key": "token",
-        "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMSIsImV4cCI6MTc3NjQ0Mjg2NSwiZmlyc3ROYW1lIjoidXNlcjEiLCJyb2xlcyI6WyJVU0VSIl19.A-2tn809DVCFjI9vn1QHAbzw3dzfxYbbD1Z7rqMs9Pitk0PFQFgF_9pQC9DCnWH9Gpt2Is1FJ_Y12DplU_E1WQ",
+        "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMSIsImV4cCI6MTc3NjQ0MzU1NywiZmlyc3ROYW1lIjoidXNlcjEiLCJyb2xlcyI6WyJVU0VSIl19.-oRGUFjj3KoA5MVTCXO8ITFM6cJE_K7pakgpnDHSpDLA8a91ZCYgYZTJ6gHxImsO4nI7Kkc33udK5ry3DcqRfw",
         "type": "string"
       }
     ]
@@ -259,23 +259,23 @@
   "variable": [
     {
       "key": "baseUrl",
-      "value": ""
+      "value": "http://localhost:8080/api"
     },
     {
       "key": "taskId",
-      "value": ""
+      "value": "1"
     },
     {
       "key": "emplId",
-      "value": ""
+      "value": "1"
     },
     {
       "key": "startTime",
-      "value": ""
+      "value": "2025-09-03T10:15:30Z"
     },
     {
       "key": "endTime",
-      "value": ""
+      "value": "2025-10-03T10:15:30Z"
     }
   ]
 }
